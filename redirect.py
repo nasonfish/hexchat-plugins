@@ -56,6 +56,8 @@ redirects:
 
 def do_hook(redir):
     def _hook(*args, **kwargs):
+        if hexchat.get_info("channel") == redir.target:
+            return hexchat.EAT_NONE  # nothing to do
         if redir.network and redir.network != hexchat.get_info("network"):
             return hexchat.EAT_NONE
         if redir.channel and redir.channel != hexchat.get_info("channel"):
